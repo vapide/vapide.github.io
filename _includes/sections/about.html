@@ -1,0 +1,11 @@
+<section class="section section--about" id="about" aria-labelledby="about-title">
+  <div class="wrap">
+    {% include section-head.html key="about" %}
+
+    <div class="prose" data-reveal>
+      {% for paragraph in site.about.paragraphs %}
+        <p>{{ paragraph }}</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>

@@ -1,3 +1,109 @@
-theme: jekyll-theme-minimal
-title: My Portfolio
-description: My portfolio for my coding projects.
+title: William Pronko
+description: >-
+  Computer science student building chess engines, search algorithms, and
+  code-transformation tools in Python Java, and C++.
+
+# Appended after the name in the browser tab and in search results.
+tagline: My Portfolio
+
+image: /assets/og-image.png
+
+twitter:
+  card: summary_large_image
+
+# A user site serves from the domain root, so baseurl stays empty. Moving this
+# into a project repo means setting it to "/that-repo".
+url: https://vapide.github.io
+baseurl: ""
+
+lang: en
+
+author:
+  name: William Pronko
+  role: Computer Science student
+  # Blank hides every mailto link on the site.
+  email: ""
+
+# Anything left blank is skipped.
+social:
+  github: https://github.com/vapide
+
+hero:
+  eyebrow: Michigan State University
+  headline: William Pronko
+  lead: >-
+    I build chess engines and other software projects focused on algorithms,
+    search, evaluation, and performance.
+  # Delete to drop the second paragraph.
+  lead_secondary: >-
+    Most recently, I've been experimenting with ways to make engine play
+    more aggressive without sacrificing overall strength.
+
+about:
+  paragraphs:
+    - >-
+      I'm an undergraduate studying computer science and transferring to
+      Michigan State. A lot of what I know came from trying to build things
+      before I really knew how (ex., bitboard move generation, alpha-beta
+      search, and quantized neural-network evaluation), then going back and
+      rewriting them once I understood what I had done wrong.
+    - >-
+      Most of my time goes into chess engines because I like problems you can
+      actually measure. If I change the search, I can run a few thousand games
+      and find out whether it gained Elo or just looked good on paper. I keep
+      a running experiment ledger for my main engine, and plenty of ideas I
+      was convinced would work are in there as failures.
+    - >-
+      Outside of chess, I'm interested in compilers, obfuscation, and code
+      transformation, or generally, anything involving software that has to
+      understand or rewrite other software. I work mostly in Python and Java,
+      with some C++ as I am learning it.
+
+sections:
+  projects:
+    number: "01"
+    label: Projects
+    title: Selected work
+  about:
+    number: "02"
+    label: About
+    title: A bit of context
+  skills:
+    number: "03"
+    label: Skills
+    title: What I work with
+  education:
+    number: "04"
+    label: Education
+    title: Education
+  contact:
+    number: "05"
+    label: Contact
+    title: Get in touch
+
+particles:
+  # false skips the canvas and its script entirely.
+  enabled: true
+  # One particle per N square pixels, so a larger number is a sparser field.
+  density: 10000
+  max_count: 140
+  # Both in px.
+  link_distance: 165
+  cursor_radius: 130
+
+permalink: pretty
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor/
+  - .jekyll-cache/
+
+sass:
+  style: compressed
+  sourcemap: never

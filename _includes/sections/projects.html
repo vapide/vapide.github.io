@@ -1,0 +1,106 @@
+{% assign featured = site.data.projects | where: "featured", true | first %}
+{% assign others = site.data.projects | where_exp: "p", "p.featured != true" %}
+
+<section class="section section--projects" id="projects" aria-labelledby="projects-title">
+  <div class="wrap">
+    {% include section-head.html key="projects" %}
+
+    {% if featured %}
+      <article class="feature" data-reveal>
+        <div class="feature__glow" aria-hidden="true"></div>
+
+        <div class="feature__body">
+          <div class="feature__head">
+            <p class="feature__flag mono">Featured</p>
+
+            <h3 class="feature__title">{{ featured.title }}</h3>
+            {% if featured.subtitle %}
+              <p class="feature__subtitle mono">{{ featured.subtitle }}</p>
+            {% endif %}
+          </div>
+
+          <p class="feature__description">{{ featured.description }}</p>
+
+          <div class="feature__rail">
+            {% if featured.technologies %}
+              <h4 class="rail-label mono">Stack</h4>
+              <ul class="taglist" aria-label="Technologies">
+                {% for tech in featured.technologies %}
+                  <li class="tag mono">{{ tech }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+
+            <p class="feature__meta mono">
+              {% if featured.repo %}
+                <a class="link" href="{{ featured.repo }}" rel="noopener">
+                  Repository {% include icon-external.html %}
+                </a>
+              {% elsif featured.status %}
+                <span class="feature__status">
+                  {% include icon-lock.html %} {{ featured.status }}
+                </span>
+              {% endif %}
+              {% if featured.year %}
+                <span class="feature__year">{{ featured.year }}</span>
+              {% endif %}
+            </p>
+          </div>
+        </div>
+
+        {% if featured.highlights %}
+          <ul class="feature__highlights">
+            {% for item in featured.highlights %}
+              <li class="highlight" data-reveal data-reveal-delay="{{ forloop.index }}">
+                <h4 class="highlight__label mono">{{ item.label }}</h4>
+                <p class="highlight__body">{{ item.body }}</p>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </article>
+    {% endif %}
+
+    {% if others.size > 0 %}
+      <h3 class="subhead mono" data-reveal>Other projects</h3>
+
+      <ul class="projects">
+        {% for project in others %}
+          <li class="project" data-reveal data-reveal-delay="{{ forloop.index }}">
+            {% if project.repo %}
+              <a class="project__hit" href="{{ project.repo }}" rel="noopener">
+                <span class="visually-hidden">{{ project.title }} on GitHub</span>
+              </a>
+            {% endif %}
+
+            <div class="project__top">
+              <h4 class="project__title">{{ project.title }}</h4>
+              {% if project.repo %}
+                <span class="project__arrow" aria-hidden="true">{% include icon-arrow.html %}</span>
+              {% endif %}
+            </div>
+
+            {% if project.subtitle %}
+              <p class="project__subtitle">{{ project.subtitle }}</p>
+            {% endif %}
+
+            <p class="project__description">{{ project.description }}</p>
+
+            {% if project.technologies %}
+              <p class="project__tech mono">
+                {{ project.technologies | join: " · " }}
+              </p>
+            {% endif %}
+
+            {% if project.status or project.year %}
+              <p class="project__meta mono">
+                {% if project.status %}<span class="project__status">{{ project.status }}</span>{% endif %}
+                {% if project.year %}<span>{{ project.year }}</span>{% endif %}
+              </p>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+</section>

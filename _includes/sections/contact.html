@@ -1,0 +1,37 @@
+<section class="section section--contact" id="contact" aria-labelledby="contact-title">
+  <div class="wrap">
+    {% include section-head.html key="contact" %}
+
+    <div class="contact" data-reveal>
+      <p class="contact__lead">
+        Most of my work is on Github, and I am happy to walk through any of it.
+        I am looking for an internship in software engineering, or any position
+        relating to the matter.
+      </p>
+
+      <div class="contact__links">
+        {% if site.social.github %}
+          <a class="contact__link" href="{{ site.social.github }}" rel="me noopener">
+            {% include icon-github.html %}
+            <span class="contact__link-text">
+              <span class="contact__link-label mono">GitHub</span>
+              <span class="contact__link-value">{{ site.social.github | remove: "https://" }}</span>
+            </span>
+            <span class="contact__link-arrow" aria-hidden="true">{% include icon-arrow.html %}</span>
+          </a>
+        {% endif %}
+
+        {% if site.author.email and site.author.email != "" %}
+          <a class="contact__link" href="mailto:{{ site.author.email }}">
+            {% include icon-mail.html %}
+            <span class="contact__link-text">
+              <span class="contact__link-label mono">Email</span>
+              <span class="contact__link-value">{{ site.author.email }}</span>
+            </span>
+            <span class="contact__link-arrow" aria-hidden="true">{% include icon-arrow.html %}</span>
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>

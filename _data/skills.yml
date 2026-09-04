@@ -1,0 +1,22 @@
+- name: Languages
+  items:
+    - Python
+    - Java
+    - C++ (Learning)
+
+- name: Tools
+  items:
+    - Git & GitHub
+    - Maven
+    - NumPy
+    - PyTorch
+    - Visual Studio / VS Code
+
+- name: Areas
+  items:
+    - Algorithms & data structures
+    - Game-tree search
+    - Neural network evaluation
+    - Performance profiling
+    - Benchmarking & A/B testing
+    - Compilers & code transformation

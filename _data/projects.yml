@@ -1,0 +1,100 @@
+# Only `title` and `description` are required. Exactly one project sets
+# `featured`, and only that one renders `highlights`. Omitting `repo` renders
+# the entry with no link. The rest appear in the order listed here.
+
+- title: Chess Engine
+  subtitle: Python · UCI · NNUE evaluation
+  featured: true
+  status: Private repository
+  year: 2025 – present
+  
+  description: >-
+    The engine includes Magic bitboard move generation,
+    Zobrist hashing, a transposition table, static
+    exchange evaluation for ordering, and the same 768 → 1024
+    network via an incremental accumulator. Move generation has
+    been verified by comparing it with the known perft node counts,
+    since this is the only way to ensure that the rules are correct.
+    The engine is to investigate how sharply sacrificial play can be
+    carried out without hurting the overall elo of the engine.
+    As a result of this project, I have learned many search
+    algorithms and program optimization techniques.
+  technologies:
+    - Python
+    - NNUE
+    - Search
+  highlights:
+    - label: Search
+      body: >-
+        Iterative deepening over an alpha-beta core, with basic pruning, and
+        SEE (Static Exchange Evaluation) for move ordering. Searches run across
+        threads against a shared transposition table.
+    - label: Evaluation
+      body: >-
+        A 768 -> 1024×2 => 1 SCReLU network, quantized to 16-bit integer, and 
+        updates incrementally making a move updates only the accumulator rows
+        the move actually touched, instead of recomputing the whole network.
+        The weights load once and are shared read-only by every search thread.
+    - label: Measurement
+      body: >-
+        Changes go through SPRT matches and engine gauntlets before they are
+        kept, with aggression scored separately from strength, to measure
+        the tradeoffs.
+
+- title: pyfuscator
+  subtitle: AST-modifying Python obfuscator
+  repo: https://github.com/vapide/pyfuscator
+  year: 2024-2025
+  description: >-
+    Obfuscates Python by altering its syntax tree rather than tokenizing it;
+    Python's built-in parser produces the tree in JSON format, and the
+    Java code then traverses it, renaming identifiers according to Python's
+    LEGB scoping rules so the correct renamings are maintained even across
+    nested functions and closures. A second Python script then converts
+    the result back into runnable source code; while local variables and
+    parameters can be renamed, renaming functions and classes has been
+    implemented but is not yet complete.
+  technologies:
+    - Java
+    - Python
+    - AST
+    - Scope analysis
+
+- title: fourier-regression
+  subtitle: Least-squares curve fitting, interactively
+  repo: https://github.com/vapide/fourier-regression
+  year: 2025
+  description: >-
+    You draw a curve using the mouse and the system then fits a Fourier series
+    to your drawing. To do this, it constructs a design matrix from sine and
+    cosine harmonics, solves the normal equations to obtain the least-squares
+    coefficients, and then varies the number of harmonics from one to twenty,
+    evaluating each fit using RMSE, R^2 and a complexity penalty before selecting
+    the curve that matches the overall shape without trying to follow every
+    small wobble.
+  technologies:
+    - Python
+    - NumPy
+    - Regression
+    - pygame
+
+- title: python-obfuscator
+  subtitle: The blunt first attempt
+  repo: https://github.com/vapide/python-obfuscator
+  status: Archived
+  year: 2022
+  description: >-
+    A previous attempt at solving the same problem as pyfuscator,
+    without using any of the associated machinery, works by
+    converting each character in the source code into a fixed-width
+    hex codepoint, creating a substitution table ordered by frequency
+    so that the most common characters are assigned the shortest codes,
+    and then outputting a self-decoding preamble which reconstructs and
+    carries out the source at runtime. Optional inclusion of only the
+    compiled bytecode. No parsing or scope analysis is involved: it
+    is simply one big string transformation. I keep it available mainly
+    as an example of where I started.
+  technologies:
+    - Python
+    - Encoding
+    - Bytecode

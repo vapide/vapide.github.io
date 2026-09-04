@@ -1,0 +1,45 @@
+<section class="hero" id="top">
+  {% if site.particles.enabled %}
+    <canvas class="hero__canvas" id="particle-canvas" aria-hidden="true"
+            data-density="{{ site.particles.density | default: 15000 }}"
+            data-max="{{ site.particles.max_count | default: 110 }}"
+            data-link="{{ site.particles.link_distance | default: 140 }}"
+            data-cursor="{{ site.particles.cursor_radius | default: 130 }}"></canvas>
+  {% endif %}
+  <div class="hero__veil" aria-hidden="true"></div>
+
+  <div class="wrap hero__inner">
+    <p class="hero__eyebrow mono" data-reveal>
+      <span class="hero__pulse" aria-hidden="true"></span>
+      {{ site.hero.eyebrow }}
+    </p>
+
+    <h1 class="hero__name" data-reveal data-reveal-delay="1">{{ site.hero.headline }}</h1>
+
+    <p class="hero__role mono" data-reveal data-reveal-delay="2">
+      {{ site.author.role }} <span class="hero__sep" aria-hidden="true">/</span> Python, Java, C++
+    </p>
+
+    <div class="hero__lead" data-reveal data-reveal-delay="3">
+      <p>{{ site.hero.lead }}</p>
+      {% if site.hero.lead_secondary %}
+        <p class="hero__lead-secondary">{{ site.hero.lead_secondary }}</p>
+      {% endif %}
+    </div>
+
+    <div class="hero__actions" data-reveal data-reveal-delay="4">
+      <a class="btn btn--primary" href="#projects">
+        View projects {% include icon-arrow.html %}
+      </a>
+      {% if site.social.github %}
+        <a class="btn btn--ghost" href="{{ site.social.github }}" rel="me noopener">
+          {% include icon-github.html %} GitHub
+        </a>
+      {% endif %}
+    </div>
+  </div>
+
+  <a class="hero__scroll" href="#projects" aria-label="Scroll to projects">
+    {% include icon-arrow-down.html %}
+  </a>
+</section>

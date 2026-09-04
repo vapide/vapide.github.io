@@ -1,0 +1,123 @@
+// A section's own top padding sits between the anchor point and the heading,
+// so #projects would otherwise land a couple of hundred pixels down an empty
+// viewport. Each section publishes its padding as --pad-top and cancels it out
+// of scroll-margin-top (which may legitimately go negative), landing every
+// heading --anchor-gap below the nav whatever its own padding is.
+.section {
+  --pad-top: var(--section-pad);
+  --anchor-gap: 2.5rem;
+
+  position: relative;
+  padding-top: var(--pad-top);
+  padding-bottom: var(--section-pad);
+  scroll-margin-top: calc(var(--anchor-gap) - var(--pad-top));
+}
+
+.section--about,
+.section--education {
+  background: var(--bg-soft);
+  border-block: 1px solid var(--line);
+}
+
+.section--projects {
+  --pad-top: clamp(3.5rem, 8vw, 6rem);
+  // The last row of project entries already carries its own bottom padding.
+  padding-bottom: clamp(3rem, 6vw, 4.5rem);
+}
+
+.section--about .wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+}
+
+.section--about .section__head {
+  margin-bottom: 0;
+}
+
+@media (max-width: 820px) {
+  .section--about .wrap {
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(1.75rem, 4vw, 2.5rem);
+  }
+}
+
+.section__head {
+  margin-bottom: clamp(2.5rem, 5vw, 3.75rem);
+}
+
+.section__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-bottom: 1.1rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.section__number {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.section__rule {
+  width: clamp(1.75rem, 5vw, 3rem);
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    var(--accent-edge),
+    rgba(255, 255, 255, 0.07)
+  );
+}
+
+.section__label {
+  color: var(--text-3);
+}
+
+.section__title {
+  max-width: 22ch;
+  font-size: clamp(1.65rem, 3.4vw, 2.4rem);
+  letter-spacing: -0.03em;
+}
+
+.subhead {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: clamp(3.5rem, 7vw, 5rem) 0 clamp(1.5rem, 3vw, 2.25rem);
+  color: var(--text-3);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+
+  &::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+}
+
+.prose {
+  max-width: 64ch;
+  color: var(--text-2);
+  font-size: clamp(1rem, 1.2vw, 1.06rem);
+  line-height: 1.8;
+
+  p + p {
+    margin-top: 1.35rem;
+  }
+
+  strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+}
+
+.section--page {
+  --pad-top: calc(var(--nav-h) + var(--section-pad));
+  min-height: 70vh;
+}

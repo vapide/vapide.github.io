@@ -1,0 +1,192 @@
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding-top: calc(var(--nav-h) + clamp(2rem, 8vh, 5rem));
+  padding-bottom: clamp(5rem, 14vh, 8rem);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hero__canvas {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.hero__veil {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      56% 46% at 21% 50%,
+      rgba(9, 9, 11, 0.92) 0%,
+      rgba(9, 9, 11, 0.78) 26%,
+      rgba(9, 9, 11, 0.52) 50%,
+      rgba(9, 9, 11, 0.24) 66%,
+      rgba(9, 9, 11, 0.06) 76%,
+      rgba(9, 9, 11, 0) 84%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(9, 9, 11, 0.7) 0%,
+      rgba(9, 9, 11, 0) 16%,
+      rgba(9, 9, 11, 0) 58%,
+      var(--bg) 100%
+    );
+}
+
+// Large low-contrast gradients over a near-black ground band badly at 8 bits
+// per channel; this noise layer dithers the steps away.
+.hero__veil::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.16;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 1;
+}
+
+.hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: clamp(1.25rem, 3vh, 2rem);
+  color: var(--text-3);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.hero__pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 0 rgba(139, 124, 246, 0.5);
+  animation: hero-pulse 3.2s var(--ease) infinite;
+}
+
+@keyframes hero-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(139, 124, 246, 0.45);
+  }
+  60%,
+  100% {
+    box-shadow: 0 0 0 7px rgba(139, 124, 246, 0);
+  }
+}
+
+.hero__name {
+  max-width: 14ch;
+  font-size: clamp(2.6rem, 8.5vw, 5.1rem);
+  font-weight: 600;
+  line-height: 0.98;
+  letter-spacing: -0.042em;
+}
+
+.hero__role {
+  margin-top: clamp(0.9rem, 2vh, 1.35rem);
+  color: var(--text-2);
+  font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+  letter-spacing: 0.02em;
+}
+
+.hero__sep {
+  margin-inline: 0.45rem;
+  color: var(--accent);
+}
+
+.hero__lead {
+  max-width: 34rem;
+  margin-top: clamp(1.5rem, 3.5vh, 2.25rem);
+  color: var(--text-2);
+  font-size: clamp(1rem, 1.3vw, 1.09rem);
+  line-height: 1.72;
+
+  p + p {
+    margin-top: 0.9rem;
+  }
+}
+
+.hero__lead-secondary {
+  color: var(--text-3);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: clamp(1.9rem, 4.5vh, 2.75rem);
+}
+
+.hero__scroll {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(1.25rem, 4vh, 2.25rem);
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-left: -1.25rem;
+  border-radius: 50%;
+  color: var(--text-3);
+  transition: color 0.25s var(--ease), background-color 0.25s var(--ease);
+  animation: hero-bob 2.8s var(--ease) infinite;
+
+  &:hover {
+    color: var(--text);
+    background: rgba(255, 255, 255, 0.05);
+  }
+}
+
+@keyframes hero-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+}
+
+@media (max-height: 620px) {
+  .hero {
+    min-height: 0;
+    padding-bottom: clamp(4rem, 10vh, 6rem);
+  }
+
+  .hero__scroll {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero__name {
+    max-width: none;
+  }
+
+  .hero__actions .btn {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__pulse,
+  .hero__scroll {
+    animation: none;
+  }
+}

@@ -1,0 +1,25 @@
+<section class="section section--education" id="education" aria-labelledby="education-title">
+  <div class="wrap">
+    {% include section-head.html key="education" %}
+
+    <ol class="timeline">
+      {% for entry in site.data.education %}
+        <li class="timeline__item" data-reveal data-reveal-delay="{{ forloop.index }}">
+          <span class="timeline__node" aria-hidden="true"></span>
+          <div class="timeline__body">
+            <h3 class="timeline__school">{{ entry.school }}</h3>
+            <p class="timeline__degree">{{ entry.degree }}</p>
+            {% if entry.notes %}
+              <ul class="timeline__notes">
+                {% for note in entry.notes %}
+                  <li>{{ note }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+          <p class="timeline__dates mono">{{ entry.dates }}</p>
+        </li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>

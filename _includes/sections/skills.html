@@ -1,0 +1,18 @@
+<section class="section section--skills" id="skills" aria-labelledby="skills-title">
+  <div class="wrap">
+    {% include section-head.html key="skills" %}
+
+    <div class="skills">
+      {% for group in site.data.skills %}
+        <div class="skills__group" data-reveal data-reveal-delay="{{ forloop.index }}">
+          <h3 class="skills__name mono">{{ group.name }}</h3>
+          <ul class="skills__list">
+            {% for item in group.items %}
+              <li>{{ item }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

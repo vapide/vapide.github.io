@@ -1,0 +1,38 @@
+{% assign nav_keys = "projects,about,skills,education,contact" | split: "," %}
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="nav" id="site-nav">
+  <div class="nav__inner">
+    <a class="nav__brand" href="{{ '/' | relative_url }}">
+      <span class="nav__brand-mark" aria-hidden="true"></span>
+      <span class="nav__brand-name">{{ site.author.name }}</span>
+    </a>
+
+    <nav class="nav__links" id="nav-links" aria-label="Sections">
+      {%- comment -%}
+        Off the home page (the 404) these have to travel back to it first.
+      {%- endcomment -%}
+      {% for key in nav_keys %}
+        {% if page.url == "/" %}
+          {% assign target = key | prepend: "#" %}
+        {% else %}
+          {% assign target = key | prepend: "/#" | relative_url %}
+        {% endif %}
+        <a class="nav__link" href="{{ target }}">{{ site.sections[key].label }}</a>
+      {% endfor %}
+      {% if site.social.github %}
+        <a class="nav__link nav__link--github" href="{{ site.social.github }}" rel="me noopener">
+          {% include icon-github.html %}
+          <span>GitHub</span>
+        </a>
+      {% endif %}
+    </nav>
+
+    <button class="nav__toggle" type="button"
+            aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
+      <span class="nav__toggle-bar" aria-hidden="true"></span>
+      <span class="nav__toggle-bar" aria-hidden="true"></span>
+    </button>
+  </div>
+</header>

@@ -1,0 +1,12 @@
+{%- comment -%}
+  `key` names an entry under `sections:` in _config.yml.
+{%- endcomment -%}
+{% assign meta = site.sections[include.key] %}
+<header class="section__head" data-reveal>
+  <p class="section__eyebrow mono">
+    <span class="section__number">{{ meta.number }}</span>
+    <span class="section__rule" aria-hidden="true"></span>
+    <span class="section__label">{{ meta.label }}</span>
+  </p>
+  <h2 class="section__title" id="{{ include.key }}-title">{{ meta.title }}</h2>
+</header>
