@@ -4,7 +4,7 @@ source "https://rubygems.org"
 # the site uses no custom theme and no plugins outside the Pages allowlist,
 # so the two stay in agreement.
 gem "jekyll", "~> 4.4"
-
+gem "github-pages", group: :jekyll_plugins
 group :jekyll_plugins do
   gem "jekyll-seo-tag", "~> 2.8"
   gem "jekyll-sitemap", "~> 1.4"
